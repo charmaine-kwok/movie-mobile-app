@@ -1,0 +1,68 @@
+{
+  "expo": {
+    "scheme": "myapp",
+    "description": "A app to record the movies, concerts, dramas or other events that I have attended",
+    "name": "Movie app",
+    "icon": "./assets/pics/movie-icon.png",
+    "userInterfaceStyle": "automatic",
+    "web": {
+      "bundler": "metro"
+    },
+    "orientation": "portrait",
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIViewControllerBasedStatusBarAppearance": true
+      },
+      "icon": "./assets/pics/movie-icon.png",
+      "splash": {
+        "image": "./assets/pics/up.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#e5e5e5"
+      },
+      "bundleIdentifier": "com.user9510.cvpworkerexporouterapp"
+    },
+    "android": {
+      "splash": {
+        "image": "./assets/pics/up.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#e5e5e5"
+      },
+      "icon": "./assets/pics/movie-icon.png",
+      "package": "com.user9510.cvpworkerexporouterapp"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8e4fce90-2c76-427a-aa81-da6573065c11"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/8e4fce90-2c76-427a-aa81-da6573065c11"
+    },
+    "owner": "user9510"
+  },
+  "slug": "movie-app",
+  "plugins": [
+    [
+      "expo-updates",
+      {
+        "username": "user9510"
+      }
+    ]
+  ],
+  "locales": {
+    "en": "./languages/english.json",
+    "zhHK": "./languages/traditionalChinese.json"
+  },
+  "android": {
+    "package": "com.user9510.movieapp"
+  },
+  "extra": {
+    "eas": {
+      "projectId": "a1a6467f-5085-4e93-a182-7ac5ea810aee"
+    }
+  }
+}

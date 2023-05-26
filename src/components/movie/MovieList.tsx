@@ -1,0 +1,76 @@
+import { FlatList } from "react-native";
+import { View, Button } from "react-native-ui-lib";
+import { useAtomValue } from "jotai";
+import { AntDesign } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
+
+import { DarkThemeAtom } from "~atoms/darkTheme";
+import CertListItem from "./MovieListItem";
+import NumberOfSelectedResults from "~components/numberOfResults/NumberOfSelectedResults";
+import { MovieProps } from "~functions/api/movie/getMoviesList";
+
+type MovieListProps = {
+  data: MovieProps[];
+  totalItem: number;
+  showLoadMoreButton: boolean;
+  loadMoreData: any;
+};
+
+const MovieList: React.FC<MovieListProps> = ({
+  data,
+  totalItem,
+  showLoadMoreButton,
+  loadMoreData,
+}) => {
+  const { t } = useTranslation();
+
+  const isDarkTheme = useAtomValue(DarkThemeAtom);
+
+  const renderFooter = () => {
+    return (
+      <View className="my-4">
+        <Button
+          bg-textColor
+          label={t("Load More")}
+          screenBG
+          iconOnRight
+          iconSource={() => (
+            <View className="ml-2">
+              <AntDesign
+                name="caretdown"
+                size={12}
+                color={`${isDarkTheme ? "black" : "white"}`}
+              />
+            </View>
+          )}
+          onPress={loadMoreData}
+        ></Button>
+      </View>
+    );
+  };
+
+  return (
+    <>
+      <View
+        bg-screenBG
+        className="h-[50] flex-row items-center justify-between border-b-2 border-slate-300 px-4"
+      >
+        <NumberOfSelectedResults totalItem={totalItem} />
+      </View>
+      <View className="mb-12 px-4">
+        <FlatList
+          data={data}
+          renderItem={({ item, index }) => (
+            <CertListItem item={item} index={index} />
+          )}
+          keyExtractor={(item, index) => index.toString()}
+          ListFooterComponent={() =>
+            showLoadMoreButton ? renderFooter() : null
+          }
+        />
+      </View>
+    </>
+  );
+};
+
+export default MovieList;
