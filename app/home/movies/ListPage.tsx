@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 
 import Loading from "~components/Loading";
 import getMoviesList from "~functions/api/movie/getMoviesList";
-import MovieList from "~components/movie/MovieList";
+import List from "~components/list/List";
 import { MovieProps } from "~functions/api/movie/getMoviesList";
 
 const ListPage: React.FC = () => {
@@ -46,7 +46,7 @@ const ListPage: React.FC = () => {
   return (
     <>
       {isLoading && <Loading />}
-      <MovieList
+      <List
         data={movieList}
         totalItem={totalItem}
         showLoadMoreButton={showLoadMoreButton}

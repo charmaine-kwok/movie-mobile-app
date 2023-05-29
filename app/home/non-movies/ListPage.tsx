@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 
 import Loading from "~components/Loading";
-import getMoviesList from "~functions/api/movie/getMoviesList";
-import CertList from "~components/movie/MovieList";
-import { MovieProps } from "~functions/api/movie/getMoviesList";
+import getNonMoviesList from "~functions/api/non-movies/getNonMoviesList";
+import List from "~components/list/List";
+import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
 
 const ListPage: React.FC = () => {
   const router = useRouter();
 
-  const [movieList, setMovieList] = useState<MovieProps[]>([]);
+  const [movieList, setMovieList] = useState<NonMovieProps[]>([]);
   const [totalItem, setTotalItem] = useState<number | null>(null);
   const [showLoadMoreButton, setShowLoadMoreButton] = useState<boolean>(false);
 
@@ -20,7 +20,7 @@ const ListPage: React.FC = () => {
   const fetchData = async (currentPage: number) => {
     try {
       setIsLoading(true);
-      const data = await getMoviesList("non-movies", currentPage);
+      const data = await getNonMoviesList(currentPage);
       if (data) {
         setMovieList((prev) => [...prev, ...data.items]);
         // only need to do once
@@ -46,7 +46,7 @@ const ListPage: React.FC = () => {
   return (
     <>
       {isLoading && <Loading />}
-      <CertList
+      <List
         data={movieList}
         totalItem={totalItem}
         showLoadMoreButton={showLoadMoreButton}

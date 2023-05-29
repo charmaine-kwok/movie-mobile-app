@@ -1,29 +1,24 @@
-export type MovieProps = {
+export type NonMovieProps = {
   iD: string;
-  title_zh: string;
-  title_en: string;
+  title: string;
   desc: string;
   location: string;
   date: string;
   rating: string;
   pic: string;
-  wiki_url: string;
 };
-export type MovieListProps = {
-  items: MovieProps[];
+export type NonMovieListProps = {
+  items: NonMovieProps[];
   totalItem: number;
   totalPage: number;
   currentPage: number;
 };
 
-const getMoviesList = async (
-  category: string,
-  page?: number
-): Promise<MovieListProps> => {
+const getNonMoviesList = async (page?: number): Promise<NonMovieListProps> => {
   // Retrieving cert id list from API server
   const response = await fetch(
     // `https://mighty-savannah-71565.herokuapp.com/${category}?page=${page}`,
-    `http://localhost:8080/api/movies/${category}?page=${page}`,
+    `http://localhost:8080/api/non-movies?page=${page}`,
     {
       method: "GET",
       headers: {
@@ -32,7 +27,7 @@ const getMoviesList = async (
     }
   );
 
-  const data: MovieListProps = await response.json();
+  const data: NonMovieListProps = await response.json();
 
   if (!data) {
     return;
@@ -40,4 +35,4 @@ const getMoviesList = async (
   return data;
 };
 
-export default getMoviesList;
+export default getNonMoviesList;

@@ -39,14 +39,6 @@ export default function Settings() {
         router.push("/home/settings/theme");
       },
     },
-    // {
-    //   name: `${t("SignOut")}`,
-
-    //   onPress: () => {
-    //     AsyncStorage.removeItem("accessToken");
-    //     router.replace("/(auth)/sign-in");
-    //   },
-    // },
   ];
 
   return (
@@ -56,7 +48,7 @@ export default function Settings() {
       <FlatList
         data={settingsList}
         ListFooterComponent={
-          <View className="opacity-60 justify-between flex-row border-b-2 py-4 mx-2 border-slate-300 ">
+          <View className="mx-2 flex-row justify-between border-b-2 border-slate-300 py-4 opacity-60 ">
             <Text textColor className={`ml-4 text-${fontSizeData + 1}xl`}>{`${t(
               "Build"
             )}`}</Text>
@@ -68,7 +60,7 @@ export default function Settings() {
         renderItem={({ item }) => (
           <Pressable
             onPress={item.onPress}
-            className="justify-between flex-row border-b-2 py-4 mx-2 border-slate-300"
+            className="mx-2 flex-row justify-between border-b-2 border-slate-300 py-4"
           >
             <Text textColor className={`ml-4 text-${fontSizeData + 1}xl`}>
               {item.name}

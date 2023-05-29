@@ -5,18 +5,21 @@ import { AntDesign } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 
 import { DarkThemeAtom } from "~atoms/darkTheme";
-import CertListItem from "./MovieListItem";
+import CertListItem from "./ListItem";
 import NumberOfSelectedResults from "~components/numberOfResults/NumberOfSelectedResults";
 import { MovieProps } from "~functions/api/movie/getMoviesList";
+import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
 
-type MovieListProps = {
-  data: MovieProps[];
+type CombinedProps = MovieProps | NonMovieProps;
+
+type ListProps = {
+  data: CombinedProps[];
   totalItem: number;
   showLoadMoreButton: boolean;
   loadMoreData: any;
 };
 
-const MovieList: React.FC<MovieListProps> = ({
+const List: React.FC<ListProps> = ({
   data,
   totalItem,
   showLoadMoreButton,
@@ -73,4 +76,4 @@ const MovieList: React.FC<MovieListProps> = ({
   );
 };
 
-export default MovieList;
+export default List;

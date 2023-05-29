@@ -29,7 +29,7 @@ export default function Layout1() {
       <Tabs.Screen
         name="movies"
         options={{
-          href: "home/",
+          href: "home",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon focused={focused}>
               <MaterialIcons

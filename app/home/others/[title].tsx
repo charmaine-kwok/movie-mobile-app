@@ -1,13 +1,42 @@
 import { useSearchParams } from "expo-router";
-import { View } from "react-native";
+import { useState, useEffect } from "react";
 
-const CertIDPage: React.FC = () => {
+import ListItemDetails from "~components/list/ListItemDetails";
+import { MovieProps } from "~functions/api/movie/getMoviesList";
+import Loading from "~components/Loading";
+import getMovieDetail from "~functions/api/movie/getMovieDetails";
+
+const DetailPage: React.FC = () => {
   const params = useSearchParams();
 
-  const UUID = params.UUID as string;
+  const title = params.title as string;
 
-  console.log(UUID);
-  return <View className="justify-center items-center"></View>;
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [movieData, setMovieData] = useState<MovieProps | null>(null);
+
+  const fetchData = async (title: string) => {
+    try {
+      setIsLoading(true);
+      const data = await getMovieDetail("others", title);
+      if (data) {
+        setIsLoading(false);
+        setMovieData(data);
+      }
+    } catch (e) {
+      console.log("error:", e);
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchData(title);
+  }, []);
+
+  return (
+    <>
+      {isLoading && <Loading />}
+      {movieData && <ListItemDetails item={movieData} />}
+    </>
+  );
 };
 
-export default CertIDPage;
+export default DetailPage;

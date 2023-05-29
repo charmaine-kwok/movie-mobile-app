@@ -4,25 +4,42 @@ import { useRouter } from "expo-router";
 import { useAtomValue } from "jotai";
 import { AntDesign } from "@expo/vector-icons";
 import i18next from "i18next";
+import { usePathname } from "expo-router";
 
 import { fontSizeAtom } from "~atoms/fontSize";
 import { MovieProps } from "~functions/api/movie/getMoviesList";
+import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
 
-type certListItemProps = { item: MovieProps; index: number };
+type certListItemProps = { item: MovieProps | NonMovieProps; index: number };
 
 const titleLanguageMapping = {
   English: "title_en",
   繁體中文: "title_zh",
 };
 
-const certListItem: React.FC<certListItemProps> = ({ item, index }) => {
+function isMovieProps(item: MovieProps | NonMovieProps): item is MovieProps {
+  return (item as MovieProps).title_en !== undefined;
+}
+
+const ListItem: React.FC<certListItemProps> = ({ item, index }) => {
   const fontSizeData = useAtomValue(fontSizeAtom);
+  const path = usePathname();
 
   const currentLanguage = i18next.language;
-  // console.log("Current language:", currentLanguage);
+
   const router = useRouter();
+  const title = isMovieProps(item) ? item.title_en : item.title;
+
   return (
-    <TouchableOpacity bg-screenBG className="border-b-2 border-slate-300">
+    <TouchableOpacity
+      bg-screenBG
+      className="border-b-2 border-slate-300"
+      onPress={() => {
+        router.push({
+          pathname: `${path}/${title}`,
+        });
+      }}
+    >
       <View className="flex-row items-center">
         <View style={{ flex: 1 }}>
           <Image
@@ -37,8 +54,10 @@ const certListItem: React.FC<certListItemProps> = ({ item, index }) => {
         <View style={{ flex: 3 }}>
           <View className="justify-center pl-8">
             <Text textColor className={`text-${fontSizeData + 1}xl`}>
-              {index + 1}. {item.title}{" "}
-              {item[titleLanguageMapping[currentLanguage]]}
+              {index + 1}.{" "}
+              {isMovieProps(item)
+                ? item[titleLanguageMapping[currentLanguage]]
+                : title}
             </Text>
           </View>
         </View>
@@ -57,4 +76,4 @@ const certListItem: React.FC<certListItemProps> = ({ item, index }) => {
     </TouchableOpacity>
   );
 };
-export default certListItem;
+export default ListItem;
