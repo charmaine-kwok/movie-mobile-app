@@ -18,7 +18,8 @@ const getNonMoviesList = async (page?: number): Promise<NonMovieListProps> => {
   // Retrieving cert id list from API server
   const response = await fetch(
     // `https://mighty-savannah-71565.herokuapp.com/${category}?page=${page}`,
-    `http://localhost:8080/api/non-movies?page=${page}`,
+    // `http://localhost:8080/api/non-movies?page=${page}`,
+    `https://go-crud.fly.dev/api/non-movies?page=${page}`,
     {
       method: "GET",
       headers: {

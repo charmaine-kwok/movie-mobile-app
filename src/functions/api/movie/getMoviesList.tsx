@@ -23,7 +23,8 @@ const getMoviesList = async (
   // Retrieving cert id list from API server
   const response = await fetch(
     // `https://mighty-savannah-71565.herokuapp.com/${category}?page=${page}`,
-    `http://localhost:8080/api/movies/${category}?page=${page}`,
+    // `http://localhost:8080/api/movies/${category}?page=${page}`,
+    `https://go-crud.fly.dev/api/movies/${category}?page=${page}`,
     {
       method: "GET",
       headers: {
