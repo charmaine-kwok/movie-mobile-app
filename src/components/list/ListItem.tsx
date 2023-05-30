@@ -6,6 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 import i18next from "i18next";
 import { usePathname } from "expo-router";
 
+import { fontSizeMap } from "~components/modal/FontSizeModal";
 import { fontSizeAtom } from "~atoms/fontSize";
 import { MovieProps } from "~functions/api/movie/getMoviesList";
 import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
@@ -53,7 +54,7 @@ const ListItem: React.FC<certListItemProps> = ({ item, index }) => {
 
         <View style={{ flex: 3 }}>
           <View className="justify-center pl-8">
-            <Text textColor className={`text-${fontSizeData + 1}xl`}>
+            <Text textColor className={`${fontSizeMap[fontSizeData]}`}>
               {index + 1}.{" "}
               {isMovieProps(item)
                 ? item[titleLanguageMapping[currentLanguage]]
@@ -68,7 +69,7 @@ const ListItem: React.FC<certListItemProps> = ({ item, index }) => {
             size={(fontSizeData + 2) * 8}
             color={"#f5ea1c"}
           />
-          <Text textColor className={`text-${fontSizeData + 1}xl ml`}>
+          <Text textColor className={`${fontSizeMap[fontSizeData]} ml`}>
             {item.rating}
           </Text>
         </View>

@@ -7,6 +7,7 @@ import { useAtomValue, useAtom } from "jotai";
 
 import { fontSizeAtom } from "~atoms/fontSize";
 import { DarkThemeAtom } from "~atoms/darkTheme";
+import { fontSizeMap } from "~components/modal/FontSizeModal";
 
 export default function Theme() {
   const fontSizeData = useAtomValue(fontSizeAtom);
@@ -43,9 +44,9 @@ export default function Theme() {
             setTheme(item.value);
             AsyncStorage.setItem("isDarkMode", item.value.toString());
           }}
-          className="justify-between flex-row border-b-2 py-4 border-slate-300"
+          className="flex-row justify-between border-b-2 border-slate-300 py-4"
         >
-          <Text textColor className={`ml-4 text-${fontSizeData + 1}xl px-2`}>
+          <Text textColor className={`ml-4 ${fontSizeMap[fontSizeData]} px-2`}>
             {item.theme}
           </Text>
         </TouchableOpacity>

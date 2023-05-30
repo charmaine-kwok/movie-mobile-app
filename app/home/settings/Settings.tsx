@@ -6,6 +6,7 @@ import { Text } from "react-native-ui-lib";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
 
+import { fontSizeMap } from "~components/modal/FontSizeModal";
 import FontSizeModal from "~components/modal/FontSizeModal";
 import { DarkThemeAtom } from "~atoms/darkTheme";
 import { fontSizeAtom } from "~atoms/fontSize";
@@ -49,10 +50,11 @@ export default function Settings() {
         data={settingsList}
         ListFooterComponent={
           <View className="mx-2 flex-row justify-between border-b-2 border-slate-300 py-4 opacity-60 ">
-            <Text textColor className={`ml-4 text-${fontSizeData + 1}xl`}>{`${t(
-              "Build"
-            )}`}</Text>
-            <Text textColor className={`mr-4 text-${fontSizeData + 1}xl `}>
+            <Text
+              textColor
+              className={`ml-4 ${fontSizeMap[fontSizeData]}`}
+            >{`${t("Build")}`}</Text>
+            <Text textColor className={`mr-4 ${fontSizeMap[fontSizeData]}`}>
               v 1.0.0
             </Text>
           </View>
@@ -62,7 +64,10 @@ export default function Settings() {
             onPress={item.onPress}
             className="mx-2 flex-row justify-between border-b-2 border-slate-300 py-4"
           >
-            <Text textColor className={`ml-4 text-${fontSizeData + 1}xl`}>
+            <Text
+              textColor
+              className={`ml-4 ${fontSizeMap[fontSizeData.toString()]}`}
+            >
               {item.name}
             </Text>
             <View className="mr-4">

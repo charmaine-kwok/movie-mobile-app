@@ -7,6 +7,7 @@ import { Text, View } from "react-native-ui-lib";
 import { openBrowserAsync } from "expo-web-browser";
 import i18next from "i18next";
 
+import { fontSizeMap } from "~components/modal/FontSizeModal";
 import { DarkThemeAtom } from "~atoms/darkTheme";
 import { MovieProps } from "~functions/api/movie/getMoviesList";
 import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
@@ -40,7 +41,7 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
   return (
     <View flex>
       <View centerH>
-        <Text textColor className={`text-${fontSizeData + 1}xl my-2`}>
+        <Text textColor className={`${fontSizeMap[fontSizeData]} my-2`}>
           {isMovieProps(item)
             ? item[titleLanguageMapping[currentLanguage]]
             : title}
@@ -60,14 +61,17 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
                 size={(fontSizeData + 2) * 8}
                 color={"#f5ea1c"}
               />
-              <Text textColor className={`text-${fontSizeData + 1}xl ml mr-4`}>
+              <Text
+                textColor
+                className={`${fontSizeMap[fontSizeData]} ml mr-4`}
+              >
                 {item.rating}
               </Text>
             </View>
             {isMovieProps(item) && (
               <Text
                 textColor
-                className={`text-${fontSizeData + 0}xl `}
+                className={`${fontSizeMap[fontSizeData]}`}
                 onPress={() => _handlePressButtonAsync(item.wiki_url)}
                 style={{ textAlign: "center" }}
               >
@@ -86,7 +90,7 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
               size={(fontSizeData + 1) * 8}
               color={`${getColor(isDarkTheme)}`}
             />
-            <Text textColor className={`text-${fontSizeData + 0}xl ml-2`}>
+            <Text textColor className={`${fontSizeMap[fontSizeData - 2]} ml-2`}>
               {item.location}
             </Text>
           </View>
@@ -96,14 +100,14 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
               size={(fontSizeData + 1) * 8}
               color={`${getColor(isDarkTheme)}`}
             />
-            <Text textColor className={`text-${fontSizeData + 0}xl ml-2`}>
+            <Text textColor className={`${fontSizeMap[fontSizeData - 2]} ml-2`}>
               {item.date}
             </Text>
           </View>
         </View>
       </View>
       <View className=" ml-2 mt-8">
-        <Text textColor className={`text-${fontSizeData + 1}xl `}>
+        <Text textColor className={`${fontSizeMap[fontSizeData]} `}>
           {item.desc}
         </Text>
       </View>

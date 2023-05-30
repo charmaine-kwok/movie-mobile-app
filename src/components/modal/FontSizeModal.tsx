@@ -14,6 +14,14 @@ type FontSizeModalProps = {
   isVisible: boolean;
 };
 
+export const fontSizeMap = {
+  "-2": "text-sm",
+  "-1": "text-base",
+  0: "text-lg",
+  1: "text-2xl",
+  2: "text-3xl",
+};
+
 export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
   const { t } = useTranslation();
 
@@ -42,7 +50,7 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
       <Modal.Container>
         <View bg-screenBG className={`rounded-xl`}>
           <Modal.Header>
-            <Text textColor center className="text-xl">
+            <Text textColor center className="text-lg">
               {`${t("AdjustFontSize")}`}
             </Text>
           </Modal.Header>
@@ -85,7 +93,7 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
               </View>
 
               <View className="flex-row justify-between">
-                <Text textColor className="text-xl">
+                <Text textColor className="text-lg">
                   A
                 </Text>
                 <Text textColor className="text-3xl">
@@ -94,11 +102,8 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
               </View>
 
               <View className="h-[60px]">
-                <Text textColor className={`text-${tempFontSize + 1}xl`}>
+                <Text textColor className={`${fontSizeMap[tempFontSize]}`}>
                   {`${t("SampleText")}`}
-                </Text>
-                <Text textColor className={`text-${tempFontSize + 1}xl`}>
-                  Size: {`${tempFontSize}`}
                 </Text>
               </View>
             </View>
@@ -113,7 +118,7 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
                   AsyncStorage.setItem("fontSize", fontSizeData.toString());
                 }}
               >
-                <Text textColor className="text-3xl">
+                <Text textColor className="text-lg">
                   Ok
                 </Text>
               </TouchableOpacity>
