@@ -1,6 +1,5 @@
-import { View } from "react-native";
 import { Dispatch, useState } from "react";
-import { Text, TouchableOpacity } from "react-native-ui-lib";
+import { Text, TouchableOpacity, View } from "react-native-ui-lib";
 import Slider from "@react-native-community/slider";
 import { useAtomValue, useAtom } from "jotai";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -41,7 +40,7 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
       }}
     >
       <Modal.Container>
-        <View className={`rounded-xl bg-${isDarkTheme ? "black" : "white"}`}>
+        <View bg-screenBG className={`rounded-xl`}>
           <Modal.Header>
             <Text textColor center className="text-xl">
               {`${t("AdjustFontSize")}`}
@@ -97,6 +96,9 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
               <View className="h-[60px]">
                 <Text textColor className={`text-${tempFontSize + 1}xl`}>
                   {`${t("SampleText")}`}
+                </Text>
+                <Text textColor className={`text-${tempFontSize + 1}xl`}>
+                  Size: {`${tempFontSize}`}
                 </Text>
               </View>
             </View>
