@@ -24,10 +24,7 @@ export default function Layout() {
         options={{ headerTitle: `${t("MovieList")}` }}
       />
       <Stack.Screen name="ListPage" />
-      <Stack.Screen
-        name="[title]"
-        options={{ headerTitle: `${t("CertInfo")}` }}
-      />
+      <Stack.Screen name="[title]" options={{ headerTitle: `${t("Info")}` }} />
     </Stack>
   );
 }
