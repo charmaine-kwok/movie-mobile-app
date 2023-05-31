@@ -6,7 +6,10 @@ import { Text } from "react-native-ui-lib";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
 
-import { fontSizeMap } from "~components/modal/FontSizeModal";
+import {
+  fontSizeMap,
+  smallerFontSizeMap,
+} from "~components/modal/FontSizeModal";
 import FontSizeModal from "~components/modal/FontSizeModal";
 import { DarkThemeAtom } from "~atoms/darkTheme";
 import { fontSizeAtom } from "~atoms/fontSize";
@@ -52,9 +55,12 @@ export default function Settings() {
           <View className="mx-2 flex-row justify-between border-b-2 border-slate-300 py-4 opacity-60 ">
             <Text
               textColor
-              className={`ml-4 ${fontSizeMap[fontSizeData]}`}
+              className={`ml-4 ${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]}`}
             >{`${t("Build")}`}</Text>
-            <Text textColor className={`mr-4 ${fontSizeMap[fontSizeData]}`}>
+            <Text
+              textColor
+              className={`mr-4 ${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]}`}
+            >
               v 1.0.0
             </Text>
           </View>
@@ -66,7 +72,7 @@ export default function Settings() {
           >
             <Text
               textColor
-              className={`ml-4 ${fontSizeMap[fontSizeData.toString()]}`}
+              className={`ml-4 ${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]}`}
             >
               {item.name}
             </Text>

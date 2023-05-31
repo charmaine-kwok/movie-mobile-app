@@ -7,7 +7,10 @@ import { Text, View } from "react-native-ui-lib";
 import { openBrowserAsync } from "expo-web-browser";
 import i18next from "i18next";
 
-import { fontSizeMap } from "~components/modal/FontSizeModal";
+import {
+  fontSizeMap,
+  smallerFontSizeMap,
+} from "~components/modal/FontSizeModal";
 import { DarkThemeAtom } from "~atoms/darkTheme";
 import { MovieProps } from "~functions/api/movie/getMoviesList";
 import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
@@ -41,7 +44,10 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
   return (
     <View flex>
       <View centerH>
-        <Text textColor className={`${fontSizeMap[fontSizeData]} my-2`}>
+        <Text
+          textColor
+          className={`${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]} my-2`}
+        >
           {isMovieProps(item)
             ? item[titleLanguageMapping[currentLanguage]]
             : title}
@@ -63,7 +69,7 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
               />
               <Text
                 textColor
-                className={`${fontSizeMap[fontSizeData]} ml mr-4`}
+                className={`${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]} ml mr-4`}
               >
                 {item.rating}
               </Text>
@@ -71,7 +77,7 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
             {isMovieProps(item) && (
               <Text
                 textColor
-                className={`${fontSizeMap[fontSizeData]}`}
+                className={`${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]}`}
                 onPress={() => _handlePressButtonAsync(item.wiki_url)}
                 style={{ textAlign: "center" }}
               >
@@ -90,7 +96,12 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
               size={(fontSizeData + 1) * 8}
               color={`${getColor(isDarkTheme)}`}
             />
-            <Text textColor className={`${fontSizeMap[fontSizeData - 2]} ml-2`}>
+            <Text
+              textColor
+              className={`${fontSizeMap[fontSizeData - 2]} sm : ${
+                smallerFontSizeMap[fontSizeData - 2]
+              } ml-2`}
+            >
               {item.location}
             </Text>
           </View>
@@ -100,14 +111,22 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
               size={(fontSizeData + 1) * 8}
               color={`${getColor(isDarkTheme)}`}
             />
-            <Text textColor className={`${fontSizeMap[fontSizeData - 2]} ml-2`}>
+            <Text
+              textColor
+              className={`${fontSizeMap[fontSizeData - 2]} sm : ${
+                smallerFontSizeMap[fontSizeData - 2]
+              } ml-2`}
+            >
               {item.date}
             </Text>
           </View>
         </View>
       </View>
-      <View className=" ml-2 mt-8">
-        <Text textColor className={`${fontSizeMap[fontSizeData]} `}>
+      <View className=" mx-2 mt-8">
+        <Text
+          textColor
+          className={`${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]} `}
+        >
           {item.desc}
         </Text>
       </View>

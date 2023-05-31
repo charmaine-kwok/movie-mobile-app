@@ -6,7 +6,10 @@ import { AntDesign } from "@expo/vector-icons";
 import i18next from "i18next";
 import { usePathname } from "expo-router";
 
-import { fontSizeMap } from "~components/modal/FontSizeModal";
+import {
+  fontSizeMap,
+  smallerFontSizeMap,
+} from "~components/modal/FontSizeModal";
 import { fontSizeAtom } from "~atoms/fontSize";
 import { MovieProps } from "~functions/api/movie/getMoviesList";
 import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
@@ -33,6 +36,7 @@ const ListItem: React.FC<certListItemProps> = ({ item, index }) => {
 
   return (
     <TouchableOpacity
+      flex
       bg-screenBG
       className="border-b-2 border-slate-300"
       onPress={() => {
@@ -42,7 +46,7 @@ const ListItem: React.FC<certListItemProps> = ({ item, index }) => {
       }}
     >
       <View className="flex-row items-center">
-        <View style={{ flex: 1 }}>
+        <View className="mr-4 flex w-1/4">
           <Image
             source={{
               uri: item.pic,
@@ -52,9 +56,12 @@ const ListItem: React.FC<certListItemProps> = ({ item, index }) => {
           />
         </View>
 
-        <View style={{ flex: 3 }}>
-          <View className="justify-center pl-8">
-            <Text textColor className={`${fontSizeMap[fontSizeData]}`}>
+        <View className="flex w-1/2 px-2">
+          <View className="justify-center">
+            <Text
+              textColor
+              className={`${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]}`}
+            >
               {index + 1}.{" "}
               {isMovieProps(item)
                 ? item[titleLanguageMapping[currentLanguage]]
@@ -63,13 +70,16 @@ const ListItem: React.FC<certListItemProps> = ({ item, index }) => {
           </View>
         </View>
 
-        <View style={{ flex: 1 }} className="flex-row items-center">
+        <View className="w-1/4 flex-1 flex-row items-center">
           <AntDesign
             name="star"
             size={(fontSizeData + 2) * 8}
             color={"#f5ea1c"}
           />
-          <Text textColor className={`${fontSizeMap[fontSizeData]} ml`}>
+          <Text
+            textColor
+            className={`${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]} ml`}
+          >
             {item.rating}
           </Text>
         </View>

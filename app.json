@@ -1,9 +1,12 @@
 {
   "expo": {
     "scheme": "myapp",
-    "description": "A app to record the movies, concerts, dramas or other events that I have attended",
     "name": "Movie app",
+    "description": "A app to record the movies, concerts, dramas or other events that I have attended",
+    "slug": "mobile-movie-app",
+    "owner": "user9510",
     "icon": "./assets/pics/movie-icon.png",
+    "version": "1.0.0",
     "userInterfaceStyle": "automatic",
     "web": {
       "bundler": "metro"
@@ -20,7 +23,7 @@
         "resizeMode": "contain",
         "backgroundColor": "#e5e5e5"
       },
-      "bundleIdentifier": "com.user9510.cvpworkerexporouterapp"
+      "bundleIdentifier": "com.user9510.movieappp"
     },
     "android": {
       "splash": {
@@ -29,22 +32,20 @@
         "backgroundColor": "#e5e5e5"
       },
       "icon": "./assets/pics/movie-icon.png",
-      "package": "com.user9510.cvpworkerexporouterapp"
+      "package": "com.user9510.movieapp"
     },
     "extra": {
       "eas": {
-        "projectId": "8e4fce90-2c76-427a-aa81-da6573065c11"
+        "projectId": "ee439f78-bcbf-409a-b1fd-6f020605e76e"
       }
     },
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/8e4fce90-2c76-427a-aa81-da6573065c11"
-    },
-    "owner": "user9510"
+      "url": "https://u.expo.dev/ee439f78-bcbf-409a-b1fd-6f020605e76e"
+    }
   },
-  "slug": "movie-app",
   "plugins": [
     [
       "expo-updates",
@@ -56,13 +57,5 @@
   "locales": {
     "en": "./languages/english.json",
     "zhHK": "./languages/traditionalChinese.json"
-  },
-  "android": {
-    "package": "com.user9510.movieapp"
-  },
-  "extra": {
-    "eas": {
-      "projectId": "a1a6467f-5085-4e93-a182-7ac5ea810aee"
-    }
   }
 }

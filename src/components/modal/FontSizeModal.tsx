@@ -22,6 +22,14 @@ export const fontSizeMap = {
   2: "text-3xl",
 };
 
+export const smallerFontSizeMap = {
+  "-2": "text-xs",
+  "-1": "text-sm",
+  0: "text-base",
+  1: "text-lg",
+  2: "text-2xl",
+};
+
 export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
   const { t } = useTranslation();
 
@@ -102,7 +110,10 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
               </View>
 
               <View className="h-[60px]">
-                <Text textColor className={`${fontSizeMap[tempFontSize]}`}>
+                <Text
+                  textColor
+                  className={`${fontSizeMap[tempFontSize]} sm : ${smallerFontSizeMap[tempFontSize]}`}
+                >
                   {`${t("SampleText")}`}
                 </Text>
               </View>

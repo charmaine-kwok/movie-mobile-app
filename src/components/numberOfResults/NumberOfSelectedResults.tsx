@@ -2,7 +2,10 @@ import { Text } from "react-native-ui-lib";
 import { useAtomValue } from "jotai";
 import { useTranslation } from "react-i18next";
 
-import { fontSizeMap } from "~components/modal/FontSizeModal";
+import {
+  fontSizeMap,
+  smallerFontSizeMap,
+} from "~components/modal/FontSizeModal";
 import { fontSizeAtom } from "~atoms/fontSize";
 
 type NumberOfSelectedResultsProps = {
@@ -16,7 +19,10 @@ const NumberOfSelectedResults: React.FC<NumberOfSelectedResultsProps> = ({
   const { t } = useTranslation();
 
   return (
-    <Text textColor className={`${fontSizeMap[fontSizeData]}`}>
+    <Text
+      textColor
+      className={`${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]}`}
+    >
       {totalItem} {totalItem <= 1 ? t("Result") : t("Results")}
     </Text>
   );

@@ -2,12 +2,15 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Text, SortableList, TouchableOpacity } from "react-native-ui-lib";
-import setTheme from "~functions/setTheme";
 import { useAtomValue, useAtom } from "jotai";
 
+import setTheme from "~functions/setTheme";
 import { fontSizeAtom } from "~atoms/fontSize";
 import { DarkThemeAtom } from "~atoms/darkTheme";
-import { fontSizeMap } from "~components/modal/FontSizeModal";
+import {
+  fontSizeMap,
+  smallerFontSizeMap,
+} from "~components/modal/FontSizeModal";
 
 export default function Theme() {
   const fontSizeData = useAtomValue(fontSizeAtom);
@@ -46,7 +49,10 @@ export default function Theme() {
           }}
           className="flex-row justify-between border-b-2 border-slate-300 py-4"
         >
-          <Text textColor className={`ml-4 ${fontSizeMap[fontSizeData]} px-2`}>
+          <Text
+            textColor
+            className={`ml-4 ${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]} px-2`}
+          >
             {item.theme}
           </Text>
         </TouchableOpacity>

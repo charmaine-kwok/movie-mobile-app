@@ -4,7 +4,10 @@ import { useTranslation } from "react-i18next";
 import { useAtomValue } from "jotai";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { fontSizeMap } from "~components/modal/FontSizeModal";
+import {
+  fontSizeMap,
+  smallerFontSizeMap,
+} from "~components/modal/FontSizeModal";
 import { fontSizeAtom } from "~atoms/fontSize";
 
 const languageList = ["繁體中文", "English"];
@@ -25,7 +28,7 @@ export default function Language() {
         >
           <Text
             textColor
-            className={`ml-4 ${fontSizeMap[fontSizeData]} text-start`}
+            className={`ml-4 ${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]} text-start`}
           >
             {item}
           </Text>
