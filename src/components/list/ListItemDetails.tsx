@@ -117,7 +117,7 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
                 smallerFontSizeMap[fontSizeData - 2]
               } ml-2`}
             >
-              {item.date}
+              {item.date.split("T")[0]}
             </Text>
           </View>
         </View>
