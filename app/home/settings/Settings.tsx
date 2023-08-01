@@ -11,12 +11,9 @@ import {
   smallerFontSizeMap,
 } from "~components/modal/FontSizeModal";
 import FontSizeModal from "~components/modal/FontSizeModal";
-import { DarkThemeAtom } from "~atoms/darkTheme";
 import { fontSizeAtom } from "~atoms/fontSize";
 
 export default function Settings() {
-  const isDarkTheme = useAtomValue(DarkThemeAtom);
-
   const [isVisible, setIsVisible] = useState(false);
 
   const { t } = useTranslation();
@@ -77,11 +74,9 @@ export default function Settings() {
               {item.name}
             </Text>
             <View className="mr-4">
-              <AntDesign
-                name="right"
-                size={24}
-                color={isDarkTheme ? "white" : "black"}
-              />
+              <Text textColor>
+                <AntDesign name="right" size={24} />
+              </Text>
             </View>
           </Pressable>
         )}

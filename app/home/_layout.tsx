@@ -1,14 +1,12 @@
 import { Tabs } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons/";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { useTranslation } from "react-i18next";
 import { useAtomValue } from "jotai";
 
 import { DarkThemeAtom } from "~atoms/darkTheme";
 import TabBarIcon from "~components/tabBarIcon/tabBarIcon";
 
 export default function Layout1() {
-  const { t } = useTranslation();
   const isDarkTheme = useAtomValue(DarkThemeAtom);
 
   return (

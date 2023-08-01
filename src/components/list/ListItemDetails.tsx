@@ -1,4 +1,3 @@
-import { useTranslation } from "react-i18next";
 import { useAtomValue } from "jotai";
 import { Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
@@ -11,11 +10,9 @@ import {
   fontSizeMap,
   smallerFontSizeMap,
 } from "~components/modal/FontSizeModal";
-import { DarkThemeAtom } from "~atoms/darkTheme";
 import { MovieProps } from "~functions/api/movie/getMoviesList";
 import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
 import { fontSizeAtom } from "~atoms/fontSize";
-import getColor from "~functions/getColor";
 
 function isMovieProps(item: MovieProps | NonMovieProps): item is MovieProps {
   return (item as MovieProps).title_en !== undefined;
@@ -33,14 +30,11 @@ const titleLanguageMapping = {
   繁體中文: "title_zh",
 };
 const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
-  const isDarkTheme = useAtomValue(DarkThemeAtom);
-
   const fontSizeData = useAtomValue(fontSizeAtom);
   const title = isMovieProps(item) ? item.title_en : item.title;
   console.log(item);
   const currentLanguage = i18next.language;
 
-  const { t } = useTranslation();
   return (
     <View flex>
       <View centerH>
@@ -91,11 +85,9 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
       <View className="ml-2 flex-row items-center justify-start">
         <View>
           <View className="my-2 flex-row items-center">
-            <Fontisto
-              name="film"
-              size={(fontSizeData + 1) * 8}
-              color={`${getColor(isDarkTheme)}`}
-            />
+            <Text textColor>
+              <Fontisto name="film" size={(fontSizeData + 1) * 8} />
+            </Text>
             <Text
               textColor
               className={`${fontSizeMap[fontSizeData - 2]} sm : ${
@@ -106,11 +98,9 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
             </Text>
           </View>
           <View className="flex-row items-center">
-            <Fontisto
-              name="date"
-              size={(fontSizeData + 1) * 8}
-              color={`${getColor(isDarkTheme)}`}
-            />
+            <Text textColor>
+              <Fontisto name="date" size={(fontSizeData + 1) * 8} />
+            </Text>
             <Text
               textColor
               className={`${fontSizeMap[fontSizeData - 2]} sm : ${

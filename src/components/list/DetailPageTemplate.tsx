@@ -1,19 +1,17 @@
-import { useSearchParams } from 'expo-router';
-import { useState, useEffect } from 'react';
+import { useSearchParams } from "expo-router";
+import { useState, useEffect } from "react";
 
-import ListItemDetails from '~components/list/ListItemDetails';
-import Loading from '~components/Loading';
+import ListItemDetails from "~components/list/ListItemDetails";
+import Loading from "~components/Loading";
 
-const DetailPageTemplate = (getDetailsFunc, DetailsPropsType) => {
+const DetailPageTemplate = (getDetailsFunc, defaultData) => {
   return () => {
     const params = useSearchParams();
 
     const title = params.title as string;
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [detailsData, setDetailsData] = useState<DetailsPropsType | null>(
-      null
-    );
+    const [detailsData, setDetailsData] = useState(defaultData);
 
     const fetchData = async (title: string) => {
       try {
@@ -24,7 +22,7 @@ const DetailPageTemplate = (getDetailsFunc, DetailsPropsType) => {
           setDetailsData(data);
         }
       } catch (e) {
-        console.log('error:', e);
+        console.log("error:", e);
         setIsLoading(false);
       }
     };

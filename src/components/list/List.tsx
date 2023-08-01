@@ -1,10 +1,8 @@
 import { FlatList } from "react-native";
-import { View, Button } from "react-native-ui-lib";
-import { useAtomValue } from "jotai";
+import { View, Text, Button } from "react-native-ui-lib";
 import { AntDesign } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 
-import { DarkThemeAtom } from "~atoms/darkTheme";
 import CertListItem from "./ListItem";
 import NumberOfSelectedResults from "~components/numberOfResults/NumberOfSelectedResults";
 import { MovieProps } from "~functions/api/movie/getMoviesList";
@@ -27,8 +25,6 @@ const List: React.FC<ListProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const isDarkTheme = useAtomValue(DarkThemeAtom);
-
   const renderFooter = () => {
     return (
       <View className="my-4">
@@ -39,11 +35,9 @@ const List: React.FC<ListProps> = ({
           iconOnRight
           iconSource={() => (
             <View className="ml-2">
-              <AntDesign
-                name="caretdown"
-                size={12}
-                color={`${isDarkTheme ? "black" : "white"}`}
-              />
+              <Text screenBG>
+                <AntDesign name="caretdown" size={12} />
+              </Text>
             </View>
           )}
           onPress={loadMoreData}
