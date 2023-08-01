@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import TabBarPlusButton from '~components/buttons/TabBarPlusButton';
+import TabBarAddButton from '~components/buttons/TabBarAddButton';
 import Loading from '~components/Loading';
 import List from '~components/list/List';
 
@@ -43,7 +43,7 @@ const ListPageTemplate = (getDataFunc, defaultData) => {
 
     return (
       <>
-        <TabBarPlusButton />
+        <TabBarAddButton />
         {isLoading && <Loading />}
         <List
           data={dataList}
