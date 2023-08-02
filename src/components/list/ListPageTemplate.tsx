@@ -50,9 +50,7 @@ const ListPageTemplate = (getDataFunc, defaultData) => {
 
         <TabBarAddButton
           onPress={() => {
-            console.log("hi");
             setIsVisible(!isVisible);
-            console.log(isVisible);
           }}
         />
 

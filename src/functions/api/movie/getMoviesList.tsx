@@ -1,5 +1,4 @@
 export type MovieProps = {
-  iD: string;
   title_zh: string;
   title_en: string;
   desc: string;
@@ -18,7 +17,7 @@ export type MovieListProps = {
 
 const getMoviesList = async (
   category: string,
-  page?: number
+  page?: number,
 ): Promise<MovieListProps> => {
   // Retrieving cert id list from API server
   const response = await fetch(
@@ -30,7 +29,7 @@ const getMoviesList = async (
       headers: {
         "Content-Type": "application/json",
       },
-    }
+    },
   );
 
   const data: MovieListProps = await response.json();

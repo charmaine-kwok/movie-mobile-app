@@ -1,5 +1,4 @@
 export type NonMovieProps = {
-  iD: string;
   title: string;
   desc: string;
   location: string;
@@ -25,7 +24,7 @@ const getNonMoviesList = async (page?: number): Promise<NonMovieListProps> => {
       headers: {
         "Content-Type": "application/json",
       },
-    }
+    },
   );
 
   const data: NonMovieListProps = await response.json();
