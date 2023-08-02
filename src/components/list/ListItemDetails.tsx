@@ -101,14 +101,16 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
             <Text textColor>
               <Fontisto name="date" size={(fontSizeData + 1) * 8} />
             </Text>
-            <Text
-              textColor
-              className={`${fontSizeMap[fontSizeData - 2]} sm : ${
-                smallerFontSizeMap[fontSizeData - 2]
-              } ml-2`}
-            >
-              {item.date.split("T")[0]}
-            </Text>
+            {item?.date && (
+              <Text
+                textColor
+                className={`${fontSizeMap[fontSizeData - 2]} sm : ${
+                  smallerFontSizeMap[fontSizeData - 2]
+                } ml-2`}
+              >
+                {item.date.split("T")[0]}
+              </Text>
+            )}
           </View>
         </View>
       </View>
