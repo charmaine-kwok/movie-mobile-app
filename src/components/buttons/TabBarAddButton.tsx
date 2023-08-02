@@ -1,17 +1,19 @@
-import { Stack } from 'expo-router';
-import { Text } from 'react-native-ui-lib';
-import { Ionicons } from '@expo/vector-icons';
+import { Stack } from "expo-router";
+import { Text } from "react-native-ui-lib";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function TabBarAddButton() {
+const TabBarAddButton: React.FC<{ onPress: () => void }> = ({ onPress }) => {
   return (
     <Stack.Screen
       options={{
         headerRight: () => (
-          <Text textColor>
-            <Ionicons name='ios-add' size={24} style={{ marginRight: 10 }} />
+          <Text textColor onPress={onPress}>
+            <Ionicons name="ios-add" size={24} style={{ marginRight: 10 }} />
           </Text>
         ),
       }}
     />
   );
-}
+};
+
+export default TabBarAddButton;
