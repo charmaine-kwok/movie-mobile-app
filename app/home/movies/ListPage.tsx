@@ -5,5 +5,6 @@ import ListPageTemplate from "~components/list/ListPageTemplate";
 const MovieListPage = ListPageTemplate(
   (page: number) => getMoviesList("movies", page),
   [] as MovieProps[],
+  "movies",
 );
 export default MovieListPage;
