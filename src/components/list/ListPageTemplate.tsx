@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import { View } from "react-native-ui-lib";
 
-import TabBarAddButton from '~components/buttons/TabBarAddButton';
-import Loading from '~components/Loading';
-import List from '~components/list/List';
+import InputModal from "~components/input/InputModal";
+import TabBarAddButton from "~components/buttons/TabBarAddButton";
+import Loading from "~components/Loading";
+import List from "~components/list/List";
 
 const ListPageTemplate = (getDataFunc, defaultData) => {
   return () => {
+    const [isVisible, setIsVisible] = useState(false);
     const [dataList, setDataList] = useState(defaultData);
     const [totalItem, setTotalItem] = useState<number | null>(null);
     const [showLoadMoreButton, setShowLoadMoreButton] =
@@ -27,7 +30,7 @@ const ListPageTemplate = (getDataFunc, defaultData) => {
         }
         setIsLoading(false);
       } catch (e) {
-        console.log('error:', e);
+        console.log("error:", e);
         setIsLoading(false);
       }
     };
@@ -43,7 +46,16 @@ const ListPageTemplate = (getDataFunc, defaultData) => {
 
     return (
       <>
-        <TabBarAddButton />
+        <InputModal isVisible={isVisible} setIsVisible={setIsVisible} />
+
+        <TabBarAddButton
+          onPress={() => {
+            console.log("hi");
+            setIsVisible(!isVisible);
+            console.log(isVisible);
+          }}
+        />
+
         {isLoading && <Loading />}
         <List
           data={dataList}
