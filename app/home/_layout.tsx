@@ -82,6 +82,15 @@ export default function Layout1() {
           headerShown: false,
         }}
       />
+
+      <Tabs.Screen
+        name="CreateItemPage"
+        options={{
+          href: null,
+          headerTitle: "Create Item",
+          // headerTitle: `${t("QR Code")}`,
+        }}
+      />
     </Tabs>
   );
 }
