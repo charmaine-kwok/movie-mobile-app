@@ -17,7 +17,7 @@ const formatDate = (date: Date) => {
   return `${day}-${month}-${year}`; // return in "DD-MM-YYYY" format
 };
 
-const CreateItemPage = () => {
+const AddItemPage = () => {
   const params = useSearchParams();
 
   const type = params.type as "movies" | "others" | "non-movies";
@@ -202,4 +202,4 @@ const CreateItemPage = () => {
   );
 };
 
-export default CreateItemPage;
+export default AddItemPage;

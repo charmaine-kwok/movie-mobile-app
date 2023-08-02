@@ -2,11 +2,13 @@ import { Tabs } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons/";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useAtomValue } from "jotai";
+import { useTranslation } from "react-i18next";
 
 import { DarkThemeAtom } from "~atoms/darkTheme";
 import TabBarIcon from "~components/tabBarIcon/tabBarIcon";
 
 export default function Layout1() {
+  const { t } = useTranslation();
   const isDarkTheme = useAtomValue(DarkThemeAtom);
 
   return (
@@ -84,11 +86,10 @@ export default function Layout1() {
       />
 
       <Tabs.Screen
-        name="CreateItemPage"
+        name="AddItemPage"
         options={{
           href: null,
-          headerTitle: "Create Item",
-          // headerTitle: `${t("QR Code")}`,
+          headerTitle: `${t("Add Item")}`,
         }}
       />
     </Tabs>
