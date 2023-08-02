@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { View } from "react-native-ui-lib";
+import { useRouter } from "expo-router";
 
 import InputModal from "~components/input/InputModal";
 import TabBarAddButton from "~components/buttons/TabBarAddButton";
 import Loading from "~components/Loading";
 import List from "~components/list/List";
 
-const ListPageTemplate = (getDataFunc, defaultData) => {
+const ListPageTemplate = (getDataFunc, defaultData, type: string) => {
   return () => {
+    const router = useRouter();
     const [isVisible, setIsVisible] = useState(false);
     const [dataList, setDataList] = useState(defaultData);
     const [totalItem, setTotalItem] = useState<number | null>(null);
@@ -50,7 +52,9 @@ const ListPageTemplate = (getDataFunc, defaultData) => {
 
         <TabBarAddButton
           onPress={() => {
-            setIsVisible(!isVisible);
+            router.push({
+              pathname: `/home/CreateItemPage/${type}`,
+            });
           }}
         />
 
