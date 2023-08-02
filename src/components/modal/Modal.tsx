@@ -50,7 +50,7 @@ const ModalContainer = ({ children }: { children: React.ReactNode }) => (
 );
 
 const ModalHeader = ({ children }: { children?: React.ReactNode }) => (
-  <View style={styles.body}>{children}</View>
+  <View style={styles.header}>{children}</View>
 );
 
 const ModalBody = ({ children }: { children?: React.ReactNode }) => (
@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
   header: {
     alignItems: "center",
     justifyContent: "center",
+    paddingVertical: 30,
   },
   text: {
     paddingTop: 10,
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   body: {
     justifyContent: "center",
     paddingHorizontal: 15,
-    minHeight: 100,
+    // minHeight: 100,
   },
   footer: {
     justifyContent: "center",
