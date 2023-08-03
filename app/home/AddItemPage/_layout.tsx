@@ -16,12 +16,7 @@ export default function Layout() {
         headerTintColor: isDarkTheme ? "#fff" : "#000",
       }}
     >
-      <Stack.Screen
-        name="[type]"
-        options={{
-          headerShown: false,
-        }}
-      />
+      <Stack.Screen name="[type]" />
     </Stack>
   );
 }
