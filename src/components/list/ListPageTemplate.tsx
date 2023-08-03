@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { View } from "react-native-ui-lib";
 import { useRouter } from "expo-router";
 
-import InputModal from "~components/input/InputModal";
 import TabBarAddButton from "~components/buttons/TabBarAddButton";
 import Loading from "~components/Loading";
 import List from "~components/list/List";
+import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
+import { MovieProps } from "~functions/api/movie/getMoviesList";
 
-const ListPageTemplate = (getDataFunc, defaultData, type: string) => {
+const ListPageTemplate = (
+  getDataFunc,
+  defaultData: NonMovieProps[] | MovieProps[],
+  type: string,
+) => {
   return () => {
     const router = useRouter();
-    const [isVisible, setIsVisible] = useState(false);
     const [dataList, setDataList] = useState(defaultData);
     const [totalItem, setTotalItem] = useState<number | null>(null);
     const [showLoadMoreButton, setShowLoadMoreButton] =
@@ -48,8 +51,6 @@ const ListPageTemplate = (getDataFunc, defaultData, type: string) => {
 
     return (
       <>
-        <InputModal isVisible={isVisible} setIsVisible={setIsVisible} />
-
         <TabBarAddButton
           onPress={() => {
             router.push({
