@@ -53,7 +53,7 @@ const ListPageTemplate = (getDataFunc, defaultData, type: string) => {
         <TabBarAddButton
           onPress={() => {
             router.push({
-              pathname: `/home/AddItemPage/${type}`,
+              pathname: `/home/${type}/AddItemPage`,
             });
           }}
         />
