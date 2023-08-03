@@ -27,6 +27,22 @@
     "Result": "Result",
     "Results": "Results",
     "No": "No",
-    "Load More": "Load More"
+    "Load More": "Load More",
+    "Add Item": "Add Item",
+    "Add": "Add",
+    "Title": "Title",
+    "Chinese Title": "Chinese Title",
+    "English Title": "English Title",
+    "Description": "Description",
+    "Location": "Location",
+    "Date": "Date",
+    "Rating": "Rating",
+    "Pic url": "Pic url",
+    "Wiki url": "Wiki url",
+    "Item added": "Item added",
+    "Add Movie Item": "Add Movie Item",
+    "Add Non-movie Item": "Add Non-movie Item",
+    "Add Other Item": "Add Movie(others) Item",
+    "This field is required.": "This field is required."
   }
 }

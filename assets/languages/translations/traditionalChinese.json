@@ -27,6 +27,22 @@
     "Result": "結果",
     "Results": "結果",
     "No": "没有",
-    "Load More": "更多"
+    "Load More": "更多",
+    "Add Item": "增添項目",
+    "Add": "增添",
+    "Title": "名稱",
+    "Chinese Title": "中文名稱",
+    "English Title": "英文名稱",
+    "Description": "描述",
+    "Location": "地點",
+    "Date": "日期",
+    "Rating": "評分",
+    "Pic url": "圖片網址",
+    "Wiki url": "維基網址",
+    "Item added": "已增添項目",
+    "Add Movie Item": "增添電影項目",
+    "Add Non-movie Item": "增添非電影項目",
+    "Add Other Item": "增添電影(其他)項目",
+    "This field is required.": "該輸入項不能為空。"
   }
 }
