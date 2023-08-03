@@ -16,7 +16,7 @@ export type MovieListProps = {
 };
 
 const getMoviesList = async (
-  category: string,
+  category: "movies" | "others",
   page?: number,
 ): Promise<MovieListProps> => {
   // Retrieving cert id list from API server
