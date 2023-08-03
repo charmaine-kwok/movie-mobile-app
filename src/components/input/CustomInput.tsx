@@ -29,14 +29,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
         widthPerct ? { width: widthPerct } : {},
         // addStyle ? addStyle : {},
       ]}
-      className="w-[70%] bg-white my-3 flex-row border px-2 rounded-md border-[#e8e8e8]"
+      className="my-3 w-[70%] flex-row rounded-md border border-[#e8e8e8] bg-white px-2"
     >
       {icon ? (
-        <View className="w-[10%] justify-center items-center ">{icon}</View>
+        <View className="w-[10%] items-center justify-center ">{icon}</View>
       ) : null}
-      <View className="p-2.5 flex-1 flex-row items-center">
+      <View className="flex-1 flex-row items-center p-2.5">
         <TextInput
-          className="w-[90%] mr-2"
+          className="mr-2 w-[90%]"
           value={value}
           onChangeText={setValue}
           placeholder={placeholder}

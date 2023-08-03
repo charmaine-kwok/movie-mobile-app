@@ -15,7 +15,7 @@ const getNonMovieDetails = async (title: string): Promise<NonMovieProps> => {
       headers: {
         "Content-Type": "application/json",
       },
-    }
+    },
   );
 
   const data: NonMovieDetailsProps = await response.json();
