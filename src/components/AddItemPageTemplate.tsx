@@ -11,7 +11,7 @@ import InputItem from "~components/input/InputItem";
 import postMovie from "~functions/api/movie/postMovie";
 import postNonMovie from "~functions/api/non-movies/postNonMovie";
 import Loading from "~components/Loading";
-import { Modal } from "~components/modal/Modal";
+import ItemAddedModal from "./modal/ItemAddedModal";
 
 const formatDate = (date: Date) => {
   const day = ("0" + date.getDate()).slice(-2); // get the day and prepend "0" if less than 10
@@ -83,30 +83,11 @@ const AddItemPageTemplate: React.FC<{
   return (
     <>
       {isCreating && <Loading />}
-
-      <Modal isVisible={isCreated} justifyContent={"center"}>
-        <Modal.Container>
-          <View bg-screenBG className="mx-8 rounded-xl">
-            <Modal.Body>
-              <View center paddingV-20 className="space-y-4">
-                <Text className="text-3xl">{t("Item added")}!</Text>
-                <Button
-                  bg-textColor
-                  size={Button.sizes.small}
-                  onPress={() => {
-                    setIsCreated(false);
-                    clearAll();
-                  }}
-                >
-                  <Text screenBG center className="text-lg">
-                    OK
-                  </Text>
-                </Button>
-              </View>
-            </Modal.Body>
-          </View>
-        </Modal.Container>
-      </Modal>
+      <ItemAddedModal
+        isVisible={isCreated}
+        setIsCreated={setIsCreated}
+        clearAll={clearAll}
+      />
 
       <View bg-screenBG className="h-full px-4 py-4">
         <ScrollView automaticallyAdjustKeyboardInsets={true}>
