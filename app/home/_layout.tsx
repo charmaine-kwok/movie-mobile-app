@@ -84,14 +84,6 @@ export default function Layout1() {
           headerShown: false,
         }}
       />
-
-      <Tabs.Screen
-        name="AddItemPage"
-        options={{
-          href: null,
-          headerShown: false,
-        }}
-      />
     </Tabs>
   );
 }
