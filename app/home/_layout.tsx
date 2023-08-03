@@ -89,7 +89,7 @@ export default function Layout1() {
         name="AddItemPage"
         options={{
           href: null,
-          headerTitle: `${t("Add Item")}`,
+          headerShown: false,
         }}
       />
     </Tabs>
