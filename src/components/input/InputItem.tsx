@@ -1,14 +1,13 @@
 import { Text, View, TextField } from "react-native-ui-lib";
-import { Controller } from "react-hook-form";
+import { Control, Controller, FieldErrors } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 const InputItem: React.FC<{
   name: string;
   label: string;
-  control: any;
-  errors: any;
-  numericKeyboard?: boolean;
-}> = ({ name, label, control, errors, numericKeyboard = false }) => {
+  control: Control<any>;
+  errors: FieldErrors;
+}> = ({ name, label, control, errors }) => {
   const { t } = useTranslation();
 
   return (
@@ -26,7 +25,6 @@ const InputItem: React.FC<{
             value={value}
             label={t(label)}
             migrate
-            keyboardType={numericKeyboard ? "numeric" : "default"}
             fieldStyle={{
               borderBottomWidth: 1,
               borderBottomColor: "gray",
@@ -44,7 +42,7 @@ const InputItem: React.FC<{
           </Text>
         </View>
       ) : (
-        <View className="h-[30px]"></View>
+        <View className="h-[30px]" />
       )}
     </View>
   );
