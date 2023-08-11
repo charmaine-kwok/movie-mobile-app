@@ -16,9 +16,20 @@ export default function Layout() {
         headerTintColor: isDarkTheme ? "#fff" : "#000",
       }}
     >
-      <Stack.Screen name="index" />
+      <Stack.Screen
+        name="index"
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="home"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="(auth)/sign-in"
         options={{
           headerShown: false,
         }}
