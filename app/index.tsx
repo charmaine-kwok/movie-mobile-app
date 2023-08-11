@@ -1,5 +1,12 @@
 import { Redirect } from "expo-router";
+import { useAtomValue } from "jotai";
+
+import { isLoggedInAtom } from "~atoms/isLoggedIn";
 
 export default function Entry() {
-  return <Redirect href="/home/movies" />;
+  const isLoggedIn = useAtomValue(isLoggedInAtom);
+
+  console.log("isloggedin", isLoggedIn);
+
+  return <Redirect href={isLoggedIn ? "/home/movies" : "/(auth)/sign-in"} />;
 }
