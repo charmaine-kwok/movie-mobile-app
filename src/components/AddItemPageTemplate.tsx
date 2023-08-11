@@ -8,10 +8,10 @@ import { useAtomValue } from "jotai";
 
 import { DarkThemeAtom } from "~atoms/darkTheme";
 import InputItem from "~components/input/InputItem";
-import postMovie from "~functions/api/movie/postMovie";
-import postNonMovie from "~functions/api/non-movies/postNonMovie";
+import postItem from "~functions/api/postItem";
 import Loading from "~components/Loading";
 import ItemAddedModal from "./modal/ItemAddedModal";
+import { TypeItem, TypeCategory } from "~functions/api/getList";
 
 const formatDate = (date: Date) => {
   const day = ("0" + date.getDate()).slice(-2); // get the day and prepend "0" if less than 10
@@ -21,190 +21,190 @@ const formatDate = (date: Date) => {
   return `${day}-${month}-${year}`; // return in "DD-MM-YYYY" format
 };
 
-const AddItemPageTemplate: React.FC<{
-  type: "movies" | "others" | "non-movies";
-}> = ({ type }) => {
-  const isDarkTheme = useAtomValue(DarkThemeAtom);
-  const [ratingValue, setRatingValue] = useState(8);
-  const { t } = useTranslation();
+const AddItemPageTemplate = <T extends TypeItem>(type: TypeCategory) => {
+  return () => {
+    const isDarkTheme = useAtomValue(DarkThemeAtom);
+    const [ratingValue, setRatingValue] = useState(8);
+    const { t } = useTranslation();
 
-  const [date, setDate] = useState(new Date());
-  const [isCreated, setIsCreated] = useState<boolean>(false);
-  const [isCreating, setIsCreating] = useState<boolean>(false);
-  const [defaultValue, setDefaultValue] = useState(
-    type === "non-movies"
-      ? {
-          title: "",
-          desc: "",
-          location: "",
-          date: formatDate(date),
-          rating: "8",
-          pic: "",
-        }
-      : {
-          title_zh: "",
-          title_en: "",
-          desc: "",
-          location: "",
-          date: formatDate(date),
-          rating: "8",
-          pic: "",
-          wiki_url: "",
-        },
-  );
+    const [date, setDate] = useState(new Date());
+    const [isCreated, setIsCreated] = useState<boolean>(false);
+    const [isCreating, setIsCreating] = useState<boolean>(false);
+    const [defaultValue, setDefaultValue] = useState(
+      type === "non-movies"
+        ? {
+            title: "",
+            desc: "",
+            location: "",
+            date: formatDate(date),
+            rating: "8",
+            pic: "",
+          }
+        : {
+            title_zh: "",
+            title: "",
+            desc: "",
+            location: "",
+            date: formatDate(date),
+            rating: "8",
+            pic: "",
+            wiki_url: "",
+          },
+    );
 
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      ...defaultValue,
-    },
-  });
+    const {
+      control,
+      handleSubmit,
+      reset,
+      formState: { errors },
+    } = useForm({
+      defaultValues: {
+        ...defaultValue,
+      },
+    });
 
-  function clearAll() {
-    reset(defaultValue);
-  }
-
-  const onSubmit = async (data) => {
-    console.log(data);
-    setIsCreating(true);
-    if (type === "non-movies") {
-      await postNonMovie(data);
-    } else {
-      await postMovie(type, data);
+    function clearAll() {
+      reset(defaultValue);
+      setRatingValue(8);
     }
-    setIsCreating(false);
-    setIsCreated(true);
-  };
 
-  return (
-    <>
-      {isCreating && <Loading />}
-      <ItemAddedModal
-        isVisible={isCreated}
-        setIsCreated={setIsCreated}
-        clearAll={clearAll}
-      />
+    const onSubmit = async (data: T) => {
+      console.log(data);
+      setIsCreating(true);
+      await postItem<T>(type, data);
+      setIsCreating(false);
+      setIsCreated(true);
+    };
+    return (
+      <>
+        {isCreating && <Loading />}
+        <ItemAddedModal
+          isVisible={isCreated}
+          setIsCreated={setIsCreated}
+          clearAll={clearAll}
+        />
 
-      <View bg-screenBG className="h-full px-4 py-4">
-        <ScrollView automaticallyAdjustKeyboardInsets={true}>
-          <View className="pb-8">
-            {type !== "non-movies" && (
-              <>
-                <InputItem
-                  name="title_zh"
-                  label="Chinese Title"
-                  control={control}
-                  errors={errors}
-                />
-                <InputItem
-                  name="title_en"
-                  label="English Title"
-                  control={control}
-                  errors={errors}
-                />
-              </>
-            )}
-            {type === "non-movies" && (
-              <InputItem
-                name="title"
-                label="Title"
-                control={control}
-                errors={errors}
-              />
-            )}
-            <InputItem
-              name="desc"
-              label="Description"
-              control={control}
-              errors={errors}
-            />
-            <InputItem
-              name="location"
-              label="Location"
-              control={control}
-              errors={errors}
-            />
-            <Controller
-              control={control}
-              name="date"
-              rules={{ required: true }}
-              render={({ field: { onChange } }) => (
+        <View bg-screenBG className="h-full px-4 py-4">
+          <ScrollView automaticallyAdjustKeyboardInsets={true}>
+            <View className="pb-8">
+              {type !== "non-movies" && (
                 <>
-                  <Text textColor className="mb-[5px]">
-                    {t("Date")}
-                  </Text>
-                  <DateTimePicker
-                    textColor
-                    value={date}
-                    mode={"date"}
-                    onChange={(selectedDate) => {
-                      // Update the state variable when the date changes
-                      setDate(selectedDate);
-                      // Also update the form data
-                      onChange(formatDate(selectedDate));
-                    }}
-                    dateFormatter={formatDate}
+                  <InputItem
+                    name="title_zh"
+                    label="Chinese Title"
+                    control={control}
+                    errors={errors}
+                  />
+                  <InputItem
+                    name="title"
+                    label="English Title"
+                    control={control}
+                    errors={errors}
                   />
                 </>
               )}
-            />
-            <Controller
-              control={control}
-              name="rating"
-              rules={{ required: true }}
-              render={({ field: { onChange } }) => (
-                <View className="mb-5">
-                  <Text textColor className="mb-[5px]">
-                    {t("Rating")}
-                  </Text>
-                  <NumericInput
-                    step={0.5}
-                    minValue={0}
-                    maxValue={10}
-                    initValue={ratingValue}
-                    valueType="real"
-                    textColor={isDarkTheme ? "#fff" : "#000"}
-                    onChange={(newValue) => {
-                      setRatingValue(newValue);
-                      onChange(newValue);
-                    }}
-                  />
-                </View>
+              {type === "non-movies" && (
+                <InputItem
+                  name="title"
+                  label="Title"
+                  control={control}
+                  errors={errors}
+                />
               )}
-            />
-            <InputItem
-              name="pic"
-              label="Pic url"
-              control={control}
-              errors={errors}
-            />
-            {type !== "non-movies" && (
               <InputItem
-                name="wiki_url"
-                label="Wiki url"
+                name="desc"
+                label="Description"
                 control={control}
                 errors={errors}
               />
-            )}
-          </View>
+              <InputItem
+                name="location"
+                label="Location"
+                control={control}
+                errors={errors}
+              />
+              <Controller
+                control={control}
+                name="date"
+                rules={{ required: true }}
+                render={({ field: { onChange } }) => (
+                  <>
+                    <Text textColor className="mb-[5px]">
+                      {t("Date")}
+                    </Text>
+                    <DateTimePicker
+                      textColor
+                      fieldStyle={{
+                        backgroundColor: "white",
+                      }}
+                      themeVariant="light"
+                      value={date}
+                      mode={"date"}
+                      onChange={(selectedDate) => {
+                        // Update the state variable when the date changes
+                        setDate(selectedDate);
+                        // Also update the form data
+                        onChange(formatDate(selectedDate));
+                      }}
+                      dateFormatter={formatDate}
+                    />
+                  </>
+                )}
+              />
+              <Controller
+                control={control}
+                name="rating"
+                rules={{ required: true }}
+                render={({ field: { onChange } }) => (
+                  <View className="mb-5">
+                    <Text textColor className="mb-[5px]">
+                      {t("Rating")}
+                    </Text>
+                    <NumericInput
+                      step={0.5}
+                      minValue={0}
+                      maxValue={10}
+                      initValue={ratingValue}
+                      valueType="real"
+                      textColor={isDarkTheme ? "#fff" : "#000"}
+                      onChange={(newValue) => {
+                        setRatingValue(newValue);
+                        onChange(newValue);
+                      }}
+                    />
+                  </View>
+                )}
+              />
+              <InputItem
+                name="pic"
+                label="Pic url"
+                control={control}
+                errors={errors}
+              />
+              {type !== "non-movies" && (
+                <InputItem
+                  name="wiki_url"
+                  label="Wiki url"
+                  control={control}
+                  errors={errors}
+                />
+              )}
+            </View>
 
-          <Button
-            bg-textColor
-            className="w-[50vw] self-center"
-            onPress={handleSubmit(onSubmit)}
-          >
-            <Text screenBG center className="text-lg">
-              {t("Add")}
-            </Text>
-          </Button>
-        </ScrollView>
-      </View>
-    </>
-  );
+            <Button
+              bg-textColor
+              className="w-[50vw] self-center"
+              onPress={handleSubmit(onSubmit)}
+            >
+              <Text screenBG center className="text-lg">
+                {t("Add")}
+              </Text>
+            </Button>
+          </ScrollView>
+        </View>
+      </>
+    );
+  };
 };
 
 export default AddItemPageTemplate;
