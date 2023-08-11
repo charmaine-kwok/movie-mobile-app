@@ -6,33 +6,32 @@ import { AntDesign } from "@expo/vector-icons";
 import i18next from "i18next";
 import { usePathname } from "expo-router";
 
+import { TypeItem } from "~functions/api/getList";
 import {
   fontSizeMap,
   smallerFontSizeMap,
 } from "~components/modal/FontSizeModal";
 import { fontSizeAtom } from "~atoms/fontSize";
-import { MovieProps } from "~functions/api/movie/getMoviesList";
-import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
+import { MovieProps } from "~functions/api/getList";
 
-type certListItemProps = { item: MovieProps | NonMovieProps; index: number };
+type ListItemProps = { item: TypeItem; index: number };
 
 const titleLanguageMapping = {
-  English: "title_en",
+  English: "title",
   繁體中文: "title_zh",
 };
 
-function isMovieProps(item: MovieProps | NonMovieProps): item is MovieProps {
-  return (item as MovieProps).title_en !== undefined;
+function isMovieProps(item: TypeItem): item is MovieProps {
+  return (item as MovieProps).title_zh !== undefined;
 }
 
-const ListItem: React.FC<certListItemProps> = ({ item, index }) => {
+const ListItem: React.FC<ListItemProps> = ({ item, index }) => {
   const fontSizeData = useAtomValue(fontSizeAtom);
   const path = usePathname();
 
   const currentLanguage = i18next.language;
 
   const router = useRouter();
-  const title = isMovieProps(item) ? item.title_en : item.title;
 
   return (
     <TouchableOpacity
@@ -41,7 +40,7 @@ const ListItem: React.FC<certListItemProps> = ({ item, index }) => {
       className="border-b-2 border-slate-300"
       onPress={() => {
         router.push({
-          pathname: `${path}/${title}`,
+          pathname: `${path}/${item.id}`,
         });
       }}
     >
@@ -65,7 +64,7 @@ const ListItem: React.FC<certListItemProps> = ({ item, index }) => {
               {index + 1}.{" "}
               {isMovieProps(item)
                 ? item[titleLanguageMapping[currentLanguage]]
-                : title}
+                : item.title}
             </Text>
           </View>
         </View>
