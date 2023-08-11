@@ -4,18 +4,18 @@ import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Text, View } from "react-native-ui-lib";
 import { openBrowserAsync } from "expo-web-browser";
+import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 
 import {
   fontSizeMap,
   smallerFontSizeMap,
 } from "~components/modal/FontSizeModal";
-import { MovieProps } from "~functions/api/movie/getMoviesList";
-import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
+import { TypeItem, MovieProps } from "~functions/api/getList";
 import { fontSizeAtom } from "~atoms/fontSize";
 
-function isMovieProps(item: MovieProps | NonMovieProps): item is MovieProps {
-  return (item as MovieProps).title_en !== undefined;
+function isMovieProps(item: TypeItem): item is MovieProps {
+  return (item as MovieProps).title_zh !== undefined;
 }
 
 const _handlePressButtonAsync = async (link: string) => {
@@ -23,15 +23,16 @@ const _handlePressButtonAsync = async (link: string) => {
 };
 
 type ListItemDetailsProps = {
-  item: MovieProps | NonMovieProps;
+  item: TypeItem;
 };
 const titleLanguageMapping = {
-  English: "title_en",
+  English: "title",
   繁體中文: "title_zh",
 };
 const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
+  const { t } = useTranslation();
   const fontSizeData = useAtomValue(fontSizeAtom);
-  const title = isMovieProps(item) ? item.title_en : item.title;
+  const title = isMovieProps(item) ? item.title_zh : item.title;
   console.log(item);
   const currentLanguage = i18next.language;
 
@@ -68,14 +69,14 @@ const ListItemDetails: React.FC<ListItemDetailsProps> = ({ item }) => {
                 {item.rating}
               </Text>
             </View>
-            {isMovieProps(item) && (
+            {isMovieProps(item) && item.wiki_url && (
               <Text
                 textColor
                 className={`${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]}`}
                 onPress={() => _handlePressButtonAsync(item.wiki_url)}
                 style={{ textAlign: "center" }}
               >
-                More Info
+                {t("More Info")}
               </Text>
             )}
           </View>
