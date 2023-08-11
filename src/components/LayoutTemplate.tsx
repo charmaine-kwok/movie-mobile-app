@@ -2,10 +2,11 @@ import { Stack } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { useAtomValue } from "jotai";
 
+import { TypeCategory } from "~functions/api/getList";
 import { DarkThemeAtom } from "~atoms/darkTheme";
 
 const LayoutTemplate: React.FC<{
-  type: "movies" | "others" | "non-movies";
+  type: TypeCategory;
 }> = ({ type }) => {
   const { t } = useTranslation();
 
@@ -26,7 +27,10 @@ const LayoutTemplate: React.FC<{
         options={{ headerTitle: `${t("MovieList")}` }}
       />
       <Stack.Screen name="ListPage" />
-      <Stack.Screen name="[title]" options={{ headerTitle: `${t("Info")}` }} />
+      <Stack.Screen
+        name="[item_id]"
+        options={{ headerTitle: `${t("Info")}` }}
+      />
       <Stack.Screen
         name="AddItemPage"
         options={{
