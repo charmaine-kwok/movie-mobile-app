@@ -4,7 +4,10 @@
     "baseUrl": ".",
     "paths": {
       "~*": ["src/*"]
-    }
+    },
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true
   },
 
   "extends": "expo/tsconfig.base"
