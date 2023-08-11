@@ -1,10 +1,6 @@
-import getMoviesList from "~functions/api/movie/getMoviesList";
-import { MovieProps } from "~functions/api/movie/getMoviesList";
+import { MovieProps } from "~functions/api/getList";
 import ListPageTemplate from "~components/list/ListPageTemplate";
 
-const MovieListPage = ListPageTemplate(
-  (page: number) => getMoviesList("movies", page),
-  [] as MovieProps[],
-  "movies",
-);
+const MovieListPage = ListPageTemplate<MovieProps>("movies");
+
 export default MovieListPage;

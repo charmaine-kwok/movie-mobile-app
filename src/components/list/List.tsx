@@ -3,21 +3,18 @@ import { View, Text, Button } from "react-native-ui-lib";
 import { AntDesign } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 
-import CertListItem from "./ListItem";
+import { TypeItem } from "~functions/api/getList";
+import ListItem from "./ListItem";
 import NumberOfSelectedResults from "~components/numberOfResults/NumberOfSelectedResults";
-import { MovieProps } from "~functions/api/movie/getMoviesList";
-import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
 
-type CombinedProps = MovieProps | NonMovieProps;
-
-type ListProps = {
-  data: CombinedProps[];
+type ListProps<TypeItem> = {
+  data: TypeItem[];
   totalItem: number;
   showLoadMoreButton: boolean;
   loadMoreData: any;
 };
 
-const List: React.FC<ListProps> = ({
+const List: React.FC<ListProps<TypeItem>> = ({
   data,
   totalItem,
   showLoadMoreButton,
@@ -58,9 +55,9 @@ const List: React.FC<ListProps> = ({
         <FlatList
           data={data}
           renderItem={({ item, index }) => (
-            <CertListItem item={item} index={index} />
+            <ListItem item={item} index={index} />
           )}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(_, index) => index.toString()}
           ListFooterComponent={() =>
             showLoadMoreButton ? renderFooter() : null
           }

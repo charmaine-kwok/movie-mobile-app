@@ -1,20 +1,16 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 
+import getList from "~functions/api/getList";
 import TabBarAddButton from "~components/buttons/TabBarAddButton";
 import Loading from "~components/Loading";
 import List from "~components/list/List";
-import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
-import { MovieProps } from "~functions/api/movie/getMoviesList";
+import { TypeList, TypeItem, TypeCategory } from "~functions/api/getList";
 
-const ListPageTemplate = (
-  getDataFunc,
-  defaultData: NonMovieProps[] | MovieProps[],
-  type: string,
-) => {
+const ListPageTemplate = <T extends TypeItem>(type: TypeCategory) => {
   return () => {
     const router = useRouter();
-    const [dataList, setDataList] = useState(defaultData);
+    const [dataList, setDataList] = useState([] as T[]);
     const [totalItem, setTotalItem] = useState<number | null>(null);
     const [showLoadMoreButton, setShowLoadMoreButton] =
       useState<boolean>(false);
@@ -26,7 +22,7 @@ const ListPageTemplate = (
     const fetchData = async (currentPage: number) => {
       try {
         setIsLoading(true);
-        const data = await getDataFunc(currentPage);
+        const data: TypeList<T> = await getList<T>(type, currentPage);
         if (data) {
           setDataList((prev) => [...prev, ...data.items]);
           // only need to do once

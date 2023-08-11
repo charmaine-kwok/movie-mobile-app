@@ -1,10 +1,4 @@
-import getNonMoviesList from "~functions/api/non-movies/getNonMoviesList";
-import { NonMovieProps } from "~functions/api/non-movies/getNonMoviesList";
+import { NonMovieProps } from "~functions/api/getList";
 import ListPageTemplate from "~components/list/ListPageTemplate";
 
-const NonMovieListPage = ListPageTemplate(
-  getNonMoviesList,
-  [] as NonMovieProps[],
-  "non-movies",
-);
-export default NonMovieListPage;
+export default ListPageTemplate<NonMovieProps>("non-movies");

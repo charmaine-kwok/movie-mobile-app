@@ -1,5 +1,4 @@
+import { MovieProps } from "~functions/api/getList";
 import AddItemPageTemplate from "~components/AddItemPageTemplate";
 
-export default function AddItemPage() {
-  return <AddItemPageTemplate type="movies" />;
-}
+export default AddItemPageTemplate<MovieProps>("movies");
