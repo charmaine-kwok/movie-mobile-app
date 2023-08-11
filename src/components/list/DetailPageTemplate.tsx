@@ -1,22 +1,24 @@
 import { useSearchParams } from "expo-router";
 import { useState, useEffect } from "react";
 
+import getDetails from "~functions/api/getItemDetails";
 import ListItemDetails from "~components/list/ListItemDetails";
 import Loading from "~components/Loading";
+import { TypeItem, TypeCategory } from "~functions/api/getList";
 
-const DetailPageTemplate = (getDetailsFunc, defaultData) => {
+const DetailPageTemplate = <T extends TypeItem>(type: TypeCategory) => {
   return () => {
     const params = useSearchParams();
 
-    const title = params.title as string;
-
+    const item_id = params.item_id as string;
+    console.log(item_id, "id");
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [detailsData, setDetailsData] = useState(defaultData);
+    const [detailsData, setDetailsData] = useState({} as T);
 
-    const fetchData = async (title: string) => {
+    const fetchData = async (item_id: string) => {
       try {
         setIsLoading(true);
-        const data = await getDetailsFunc(title);
+        const data = await getDetails<T>(type, item_id);
         if (data) {
           setIsLoading(false);
           setDetailsData(data);
@@ -27,13 +29,12 @@ const DetailPageTemplate = (getDetailsFunc, defaultData) => {
       }
     };
     useEffect(() => {
-      fetchData(title);
+      fetchData(item_id);
     }, []);
-
     return (
       <>
         {isLoading && <Loading />}
-        {detailsData && <ListItemDetails item={detailsData} />}
+        {!isLoading && detailsData && <ListItemDetails item={detailsData} />}
       </>
     );
   };
