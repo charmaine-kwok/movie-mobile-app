@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Modal, View, Text, Pressable, StyleSheet } from "react-native";
+import {
+  Modal,
+  View,
+  Text,
+  Pressable,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from "react-native";
 
 const LanguagePicker = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -33,13 +40,15 @@ const LanguagePicker = () => {
           setModalVisible(!modalVisible);
         }}
       >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            {languages.map((lang) => (
-              <LanguageItem {...lang} key={lang.name} />
-            ))}
+        <TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              {languages.map((lang) => (
+                <LanguageItem {...lang} key={lang.name} />
+              ))}
+            </View>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       </Modal>
       <Pressable
         style={[styles.button, styles.buttonOpen]}
