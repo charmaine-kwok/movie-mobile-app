@@ -6,6 +6,7 @@ import { Text } from "react-native-ui-lib";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
 
+import { removeJWT } from "app/(auth)/sign-in";
 import {
   fontSizeMap,
   smallerFontSizeMap,
@@ -40,6 +41,14 @@ export default function Settings() {
         router.push("/home/settings/theme");
       },
     },
+    {
+      name: `${t("SignOut")}`,
+
+      onPress: () => {
+        removeJWT("accessToken");
+        router.replace("/(auth)/sign-in");
+      },
+    },
   ];
 
   return (
@@ -53,7 +62,9 @@ export default function Settings() {
             <Text
               textColor
               className={`ml-4 ${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]}`}
-            >{`${t("Build")}`}</Text>
+            >
+              {t("Build")}
+            </Text>
             <Text
               textColor
               className={`mr-4 ${fontSizeMap[fontSizeData]} sm : ${smallerFontSizeMap[fontSizeData]}`}
