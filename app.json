@@ -13,6 +13,7 @@
     },
     "orientation": "portrait",
     "ios": {
+      "usesNonExemptEncryption": false,
       "supportsTablet": true,
       "infoPlist": {
         "UIViewControllerBasedStatusBarAppearance": true
