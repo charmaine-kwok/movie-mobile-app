@@ -2,6 +2,8 @@
   "expo": {
     "scheme": "myapp",
     "name": "Movie app",
+    "currentFullName": "@user9510/mobile-movie-app",
+    "originalFullName": "@user9510/mobile-movie-app",
     "description": "A app to record the movies, concerts, dramas or other events that I have attended",
     "slug": "mobile-movie-app",
     "owner": "user9510",
