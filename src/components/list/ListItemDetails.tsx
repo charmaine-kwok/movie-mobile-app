@@ -1,7 +1,6 @@
 import { useAtomValue } from "jotai";
 import { Image } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import { Fontisto } from "@expo/vector-icons";
+import { AntDesign, Fontisto } from "@expo/vector-icons";
 import { Text, View } from "react-native-ui-lib";
 import { openBrowserAsync } from "expo-web-browser";
 import { useTranslation } from "react-i18next";
@@ -19,7 +18,7 @@ function isMovieProps(item: TypeItem): item is MovieProps {
 }
 
 const _handlePressButtonAsync = async (link: string) => {
-  let result = await openBrowserAsync(link);
+  await openBrowserAsync(link);
 };
 
 type ListItemDetailsProps = {
