@@ -1,12 +1,13 @@
 import { Image, Alert } from "react-native";
-import { View, Text, Button } from "react-native-ui-lib";
-import { Stack } from "expo-router";
-import { FontAwesome, Entypo } from "@expo/vector-icons";
+import { View, Text, Button, TouchableOpacity } from "react-native-ui-lib";
 import { useTranslation } from "react-i18next";
-import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
+import Dash from "react-native-dash";
+import { Stack, useRouter } from "expo-router";
+import { FontAwesome, Entypo } from "@expo/vector-icons";
 import * as SecureStore from "expo-secure-store";
 
+import googleSignIn from "../../assets/pics/btn_google_signin_light_normal_web.png";
 import LanguagePicker from "~components/LanguagePicker";
 import DismissKeyboard from "~components/DismissKeyboard";
 import CustomInput from "~components/input/CustomInput";
@@ -130,6 +131,26 @@ export default function SignIn() {
               {t("Sign In")}
             </Text>
           </Button>
+
+          <View className="my-4 flex flex-row items-center space-x-8 ">
+            <Dash
+              style={{ width: "35%" }}
+              dashGap={10}
+              dashLength={10}
+              dashThickness={1}
+            />
+            <Text black>{t("Or")}</Text>
+            <Dash
+              style={{ width: "35%" }}
+              dashGap={10}
+              dashLength={10}
+              dashThickness={1}
+            />
+          </View>
+          <TouchableOpacity onPress={() => {}} className="my-2">
+            <Image source={googleSignIn} />
+          </TouchableOpacity>
+
           <LanguagePicker />
         </View>
       </DismissKeyboard>
