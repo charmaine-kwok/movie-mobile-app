@@ -32,12 +32,13 @@ export type TypeList<TypeItem> = {
 
 const getList = async <TypeItem,>(
   type: TypeCategory,
+  order: string = "ASC",
   page?: number,
 ): Promise<TypeList<TypeItem>> => {
   // Retrieving item list from API server
   const response = await fetch(
-    `https://go-crud.fly.dev/api/${type}?page=${page}`, // production use
-    // `http://localhost:8080/api/${type}?page=${page}`, // local use
+    `https://go-crud.fly.dev/api/${type}?page=${page}&order_by=${order}`, // production use
+    // `http://localhost:8080/api/${type}?page=${page}&order_by=${order}`, // local use
     {
       method: "GET",
       headers: {
