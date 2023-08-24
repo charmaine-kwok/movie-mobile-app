@@ -34,9 +34,8 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
   const { t } = useTranslation();
 
   const isDarkTheme = useAtomValue(DarkThemeAtom);
-  const [storedValue, setStoredValue] = useState<null | number>(null);
-  const [valueInModal, setValue] = useState<number>(storedValue ?? 1);
   const [fontSizeData, setFontSizeData] = useAtom(fontSizeAtom);
+  const [valueInModal, setValue] = useState<number>(fontSizeData ?? 1);
   const [tempFontSize, setTempFontSize] = useState<number>(fontSizeData);
 
   const valueChangeHandler: (fontSize: number) => void = (fontSize) => {
@@ -120,20 +119,19 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
             </View>
           </Modal.Body>
           <Modal.Footer>
-            <View className="mb-8">
-              <TouchableOpacity
-                onPress={() => {
-                  props.setIsVisible(false);
-                  setValue(valueInModal);
-                  setFontSizeData(valueInModal);
-                  AsyncStorage.setItem("fontSize", fontSizeData.toString());
-                }}
-              >
-                <Text textColor className="text-lg">
-                  Ok
-                </Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              className="mb-8"
+              onPress={() => {
+                props.setIsVisible(false);
+                setValue(valueInModal);
+                setFontSizeData(valueInModal);
+                AsyncStorage.setItem("fontSize", fontSizeData.toString());
+              }}
+            >
+              <Text textColor className="text-lg">
+                Ok
+              </Text>
+            </TouchableOpacity>
           </Modal.Footer>
         </View>
       </Modal.Container>
