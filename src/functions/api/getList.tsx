@@ -32,7 +32,7 @@ export type TypeList<TypeItem> = {
 
 const getList = async <TypeItem,>(
   type: TypeCategory,
-  order: string = "ASC",
+  order?: string,
   page?: number,
 ): Promise<TypeList<TypeItem>> => {
   // Retrieving item list from API server
