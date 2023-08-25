@@ -173,10 +173,10 @@ export default function SignIn() {
     <>
       <Stack.Screen options={{ headerShown: false }} />
       <DismissKeyboard>
-        <View className="flex-1 items-center bg-[#d3d3d3]">
-          <View className="mb-8 flex h-[40%] flex-row items-end">
+        <View className="flex-1 items-center justify-center bg-[#d3d3d3]">
+          <View className="mb-8 flex h-[20%] flex-row items-end">
             <Image
-              className={"h-[50%] w-[50%]"}
+              className={"h-[100%] w-[50%]"}
               resizeMode="contain"
               source={require("../../assets/pics/movie-icon.png")}
             ></Image>
