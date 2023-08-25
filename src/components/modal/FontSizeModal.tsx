@@ -30,7 +30,10 @@ export const smallerFontSizeMap = {
   2: "text-2xl",
 };
 
-export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
+export const FontSizeModal: React.FC<FontSizeModalProps> = ({
+  setIsVisible,
+  isVisible,
+}) => {
   const { t } = useTranslation();
 
   const isDarkTheme = useAtomValue(DarkThemeAtom);
@@ -46,9 +49,9 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
   return (
     <Modal
       justifyContent={"flex-end"}
-      isVisible={props.isVisible}
+      isVisible={isVisible}
       onBackdropPress={() => {
-        props.setIsVisible(false);
+        setIsVisible(false);
         setValue(valueInModal);
         setFontSizeData(valueInModal);
         AsyncStorage.setItem("fontSize", fontSizeData.toString());
@@ -122,7 +125,7 @@ export const FontSizeModal: React.FC<FontSizeModalProps> = (props) => {
             <TouchableOpacity
               className="mb-8"
               onPress={() => {
-                props.setIsVisible(false);
+                setIsVisible(false);
                 setValue(valueInModal);
                 setFontSizeData(valueInModal);
                 AsyncStorage.setItem("fontSize", fontSizeData.toString());
